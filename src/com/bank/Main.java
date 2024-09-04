@@ -11,6 +11,7 @@ public class Main {
 		while(true){
 			System.out.println("\n");
 			System.out.println("1. Add Customer");
+			System.out.println("2. Add Customer");
 		}
 	}
 }
