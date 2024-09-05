@@ -6,7 +6,7 @@ import java.util.Scanner;
 public class Main {
 	
 	public static void clearScreen() {
-        for (int i = 0; i < 50; i++) { // Print 50 blank lines
+        for (int i = 0; i < 50; i++) { // print 50 blank lines
             System.out.println();
         }
     }
