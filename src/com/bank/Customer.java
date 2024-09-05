@@ -4,7 +4,7 @@ public class Customer {
 	private String name;
 	private BankAccount bankAccount;
 	
-	public Customer(String name, String accountNumber) {
+	public Customer(String name, double accountNumber) {
 		this.name = name;
 		this.bankAccount = new BankAccount(accountNumber);
 	}

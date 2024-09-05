@@ -1,5 +1,6 @@
 package com.bank;
 
+import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Scanner;
 
@@ -21,6 +22,8 @@ public class Main {
 		Bank bank = new Bank();
 		
 		while(true){
+
+	      try {
 			System.out.println("\nBank Account Management System");
             System.out.println("1. Add Customer");
             System.out.println("2. Deposit");
@@ -36,7 +39,7 @@ public class Main {
             		System.out.print("Enter customer name: ");
             		String name = scanner.next();
             		System.out.print("Enter account number: ");
-            		String accountNumber = scanner.next();
+            		double accountNumber = scanner.nextInt();
             		Customer customer = new Customer(name, accountNumber);
             		bank.addCustomer(customer);
             		pauseForKey(scanner); 
@@ -100,6 +103,14 @@ public class Main {
             		break;
             }
             clearScreen();
+	      } catch (InputMismatchException e) {
+              System.out.println("Invalid input. Please enter a valid number.");
+              scanner.nextLine(); 
+              pauseForKey(scanner); 
+          } catch (Exception e) {
+              System.out.println("An unexpected error occurred: " + e.getMessage());
+              pauseForKey(scanner); 
+          }
 		}
 	}
 }

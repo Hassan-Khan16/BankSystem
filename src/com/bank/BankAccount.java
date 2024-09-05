@@ -1,15 +1,15 @@
 package com.bank;
 
 public class BankAccount {
-	private String accountNumber;
+	private double accountNumber;
 	private double balance;
 	
-	public BankAccount(String accountNumber) {
+	public BankAccount(double accountNumber) {
 		this.accountNumber = accountNumber;
 		this.balance = 0.0;
 	}
 	
-	public String getAccountNumber() {
+	public double getAccountNumber() {
 		return accountNumber;
 	}
 	
