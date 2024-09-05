@@ -15,6 +15,10 @@ public class Bank {
 		System.out.println("Customer " + customer.getName() + " added.");
 	}
 	
+	public List<Customer> getAllCustomers() {
+		return customers;
+	}
+	
 	public Customer findCustomer(String name) {
 		for(Customer customer : customers) {
 			if(customer.getName().equalsIgnoreCase(name)) {
