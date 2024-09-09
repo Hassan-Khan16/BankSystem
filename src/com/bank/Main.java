@@ -13,19 +13,25 @@ public class Main {
 
 		frame.setLayout(new FlowLayout());
 
-		JLabel welcomeLabel = new JLabel("Welcome to the Bank");
-		JButton demoButton = new JButton("Demo button");
+		JLabel nameLabel = new JLabel("Enter Customer Name:");
+		JTextField nameInput = new JTextField(15);
+		JButton addButton = new JButton("Add Customer");
 
-		demoButton.addActionListener(new ActionListener(){
+		JLabel resultLabel = new JLabel("");
+
+		addButton.addActionListener(new ActionListener(){
 			@Override
 			public void actionPerformed(ActionEvent e){
-				welcomeLabel.setText("Button Clicked!");
+				String customerName = nameInput.getText();
+				resultLabel.setText("Customer Added: "+ customerName);
+				nameInput.setText("");
 			}
 		});
 
-		frame.add(welcomeLabel);
-		frame.add(demoButton);
-
+		frame.add(nameLabel);
+		frame.add(nameInput);
+		frame.add(addButton);
+		frame.add(resultLabel);
 		frame.setVisible(true);
 	}
 }
