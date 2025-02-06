@@ -1,116 +1,65 @@
 package com.bank;
 
-import java.util.InputMismatchException;
-import java.util.List;
-import java.util.Scanner;
+import javax.swing.JFrame;
+import javax.swing.JButton;
+import javax.swing.JLabel;
+import javax.swing.JTextField;
+import javax.swing.JDialog;
+import java.awt.FlowLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 public class Main {
 	
-	public static void clearScreen() {
-        for (int i = 0; i < 50; i++) { // print 50 blank lines
-            System.out.println();
-        }
-    }
-	
-	public static void pauseForKey(Scanner scanner) {
-        System.out.println("\nPress any key to continue...");
-        scanner.next(); // Wait for the user to press Enter
-    }
-
 	public static void main(String[] args) {
-		Scanner scanner = new Scanner(System.in);
-		Bank bank = new Bank();
 		
-		while(true){
+		JFrame frame = new JFrame("Bank System");
 
-	      try {
-			System.out.println("\nBank Account Management System");
-            System.out.println("1. Add Customer");
-            System.out.println("2. Deposit");
-            System.out.println("3. Withdraw");
-            System.out.println("4. Check Balance");
-            System.out.println("5. List Customers");
-            System.out.println("6. Exit");
-            System.out.print("Choose an option: ");
-            int choice = scanner.nextInt();
-            
-            switch (choice) {
-            	case 1:
-            		System.out.print("Enter customer name: ");
-            		String name = scanner.next();
-            		System.out.print("Enter account number: ");
-            		double accountNumber = scanner.nextInt();
-            		Customer customer = new Customer(name, accountNumber);
-            		bank.addCustomer(customer);
-            		pauseForKey(scanner); 
-            		break;
-            	case 2:
-            		System.out.print("Enter customer name: ");
-            		name = scanner.next();
-            		customer = bank.findCustomer(name);
-            		if(customer != null) {
-            			System.out.print("Enter deposit amount: ");
-            			double amount = scanner.nextDouble();
-            			customer.getBankAccount().deposit(amount);
-            		} else {
-            			System.out.println("Customer not found.");
-            		}
-            		pauseForKey(scanner); 
-            		break;
-            	case 3:
-            		System.out.print("Enter customer name: ");
-            		name = scanner.next();
-            		customer = bank.findCustomer(name);
-            		if(customer != null) {
-            			System.out.print("Enter withdrawal amount: ");
-            			double amount = scanner.nextDouble();
-            			customer.getBankAccount().withdraw(amount);
-            		} else {
-            			System.out.println("Customer not found.");
-            		}
-            		pauseForKey(scanner); 
-            		break;
-            	case 4:
-                    System.out.print("Enter customer name: ");
-                    name = scanner.next();
-                    customer = bank.findCustomer(name);
-                    if ( customer != null ) {
-                    	System.out.println("Balance: Rs" + customer.getBankAccount().getBalance());
-                    } else {
-                    	System.out.println("Customer not found. ");
-                    }
-                    pauseForKey(scanner); 
-                    break;
-            	case 5:
-            		List<Customer> customers =  bank.getAllCustomers();
-            		if(customers.isEmpty()) {
-            			System.out.println("No customers available. ");
-            		} else {
-            			System.out.println("List of Customers: ");
-            			for(Customer c :customers) {
-            				System.out.println("Customer Name: " + c.getName() + " || Account Number: "+ c.getBankAccount().getAccountNumber());
-            			}
-            		}
-            		pauseForKey(scanner); 
-            		break;
-            	case 6:
-            		System.out.println("Exiting...");
-            		scanner.close();
-            		return;
-            	default:
-            		System.out.println("Invalid option. Please try again.");
-            		pauseForKey(scanner); 
-            		break;
-            }
-            clearScreen();
-	      } catch (InputMismatchException e) {
-              System.out.println("Invalid input. Please enter a valid number.");
-              scanner.nextLine(); 
-              pauseForKey(scanner); 
-          } catch (Exception e) {
-              System.out.println("An unexpected error occurred: " + e.getMessage());
-              pauseForKey(scanner); 
-          }
-		}
+        // Set the width and height of the frame
+        frame.setSize(800, 600);
+
+        // Close the program when the window is closed
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setLayout(new FlowLayout());
+        
+        JLabel nameLabel = new JLabel("Enter Customer Name: ");
+        JTextField nameInput = new JTextField(15);
+        JButton addButton = new JButton("Add Customer");
+        JButton viewButton = new JButton("View All Customers");
+        
+        // Create a Label
+        JLabel resultLabel = new JLabel("");
+        
+        addButton.addActionListener(new ActionListener() {
+        	@Override
+        	public void actionPerformed(ActionEvent e) {
+        		String customerName = nameInput.getText();
+        		resultLabel.setText("Customer Added: " + customerName);
+        		nameInput.setText("");
+        	}
+        });
+        
+        viewButton.addActionListener(new ActionListener(){
+        	@Override
+        	public void actionPerformed(ActionEvent e) {
+        		JDialog dialog = new JDialog(frame, "Customer List", true);
+        		dialog.setSize(300,200);
+        		dialog.setLayout(new FlowLayout());
+        		JLabel customerLabel = new JLabel("Customer: John Doe");
+        		dialog.add(customerLabel);
+        		dialog.setVisible(true);
+        	}
+        });
+        
+        // Call Label and button
+        frame.add(nameLabel);
+        frame.add(nameInput);
+        frame.add(addButton);
+        frame.add(viewButton);
+        frame.add(resultLabel);
+        
+        // Make the frame visible
+        frame.setVisible(true);
+		
 	}
 }
